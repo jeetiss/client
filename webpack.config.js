@@ -39,7 +39,7 @@ module.exports = createConfig([
   addPlugins(basePlugins),
   env('development', [
     babel({
-      plugins: [ 'react-hot-loader/babel' ],
+      plugins: [ 'react-hot-loader/babel', 'transform-object-rest-spread' ],
       presets: [
         ['env', {
           'targets': {

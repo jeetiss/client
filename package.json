@@ -13,6 +13,7 @@
     "@webpack-blocks/babel6": "^0.3.0",
     "@webpack-blocks/dev-server2": "^0.3.0",
     "@webpack-blocks/webpack2": "^0.3.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.1.4",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
@@ -24,6 +25,7 @@
     "react-dom": "^15.4.1",
     "react-hot-loader": "^3.0.0-beta.5",
     "react-redux": "^5.0.1",
+    "react-router-dom": "^4.0.0-beta.6",
     "redux": "^3.6.0",
     "styled-components": "^1.2.1"
   }
