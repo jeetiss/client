@@ -20,48 +20,22 @@ injectGlobal`
   }
 `
 
-class LoginForm extends React.Component {
-  constructor (props) {
-    super(props)
+function LoginForm ({ onSub }) {
+  let name
+  let pass
 
-    this.state = {
-      hiddenPass: true
-    }
-
-    this.onSub = props.onSub
-    this.onSubmitHandler = this.onSubmit.bind(this)
-    this.onInputHandler = this.onInput.bind(this)
-  }
-
-  onSubmit (e) {
-    e.preventDefault()
-    const name = this.name.value
-    const pass = this.pass.value
-
-    this.onSub(name, pass)
-  }
-
-  onInput (e) {
-    const hiddenPass = this.name.value !== 'jeetiss'
-    if (this.state.hiddenPass !== hiddenPass) {
-      this.setState({ hiddenPass })
-    }
-  }
-
-  render () {
-    const { hiddenPass } = this.state
-    const display = hiddenPass ? 'none' : 'inline-block'
-
-    return (
-      <form>
-        <input type='name' ref={name => { this.name = name }} onInput={this.onInputHandler}/>
-        <br />
-        <input type='pass' ref={pass => { this.pass = pass }} style={{display}} />
-        <br />
-        <button onClick={this.onSubmitHandler}>Submit</button>
-      </form>
-    )
-  }
+  return (
+    <form>
+      <input type='name' ref={nm => { name = nm }} />
+      <br />
+      <input type='pass' ref={ps => { pass = ps }} />
+      <br />
+      <button onClick={(e) => {
+        e.preventDefault()
+        onSub(name.value, pass.value)
+      }}>Submit</button>
+    </form>
+  )
 }
 
 function Chat ({ messages, dispatch }) {
