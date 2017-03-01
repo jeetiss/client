@@ -1,9 +1,12 @@
 export default function socketReducer (state, action) {
-  if (action.type === 'send') {
-    const { type } = action.data
-
-    if (type === 'auth') {
-      return {...state, isAuthenticated: true}
+  if (action.type === 'user') {
+    return {
+      ...state,
+      user: {
+        isAuthenticated: true,
+        isSupa: action.isSupa,
+        name: action.name
+      }
     }
   } else if (action.type === 'message') {
     return {

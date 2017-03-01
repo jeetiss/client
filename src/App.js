@@ -64,14 +64,6 @@ class LoginForm extends React.Component {
   }
 }
 
-function sendMessage (data) {
-  return (send) => {
-    send(data)
-
-    return { type: 'send', data }
-  }
-}
-
 function Chat ({ messages, dispatch }) {
   let textarea
 
@@ -94,7 +86,7 @@ function Chat ({ messages, dispatch }) {
             return
           }
 
-          dispatch(sendMessage({type: 'message', text: value}))
+          dispatch({type: 'ws/message', text: value})
           textarea.value = ''
         }}>
           submit
@@ -103,7 +95,7 @@ function Chat ({ messages, dispatch }) {
     </div>
   )
 }
-      // <LoginForm onSub={(...args) => console.log(args)} />
+
 const stop = store => ({ messages: store.messages })
 const CChat = connect(stop)(Chat)
 
@@ -116,9 +108,9 @@ const App = () => (
   </Router>
 )
 
-const PR = ({ isAuthenticated, component, ...rest }) => (
+const PR = ({ user, component, ...rest }) => (
   <Route {...rest} render={props =>
-    isAuthenticated
+    user.isAuthenticated
     ? React.createElement(component, props)
     : <Redirect to={{
       pathname: '/login',
@@ -127,17 +119,17 @@ const PR = ({ isAuthenticated, component, ...rest }) => (
   } />
 )
 
-const sttopr = state => ({isAuthenticated: state.isAuthenticated})
+const sttopr = state => ({user: state.user})
 const PrivateRoute = connect(sttopr)(PR)
 
 
-function Login ({ dispatch, isAuthenticated }) {
-  if (isAuthenticated) {
+function Login ({ dispatch, user }) {
+  if (user.isAuthenticated) {
     return <Redirect to={{ pathname: '/' }} />
   } else {
     return <LoginForm
       onSub={(name, pass) => dispatch(
-        sendMessage({ type: 'auth', name, pass })
+        { type: 'ws/auth', name, pass }
       )}
     />
   }

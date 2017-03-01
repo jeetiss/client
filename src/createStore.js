@@ -14,11 +14,11 @@ function createSocketMiddleware (socket) {
     })
 
     return next => action => {
-      if (typeof action === 'function') {
-        next(action(send))
-      } else {
-        return next(action)
+      if (action.type.startsWith('ws/')) {
+        send(action)
       }
+
+      return next(action)
     }
   }
 }
@@ -26,6 +26,6 @@ function createSocketMiddleware (socket) {
 const middlws = createSocketMiddleware(ws)
 
 export default function createStore () {
-  return cs(example, {messages: [], isAuthenticated: false}, applyMiddleware(middlws))
+  return cs(example, {messages: [], user: {}}, applyMiddleware(middlws))
 }
 
