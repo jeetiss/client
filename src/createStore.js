@@ -1,5 +1,5 @@
-import { createStore as cs, applyMiddleware } from 'redux'
-import example from './reducers/reducer'
+import { createStore as cs, applyMiddleware, combineReducers } from 'redux'
+import { messageReducer as messages, userReducer as user } from './reducers/reducer'
 
 const ws = new window.WebSocket('ws://localhost:1234')
 
@@ -9,7 +9,6 @@ function createSocketMiddleware (socket) {
   return ({ dispatch }) => {
     socket.addEventListener('message', e => {
       const msg = JSON.parse(e.data)
-      console.log(msg)
       dispatch(msg)
     })
 
@@ -26,6 +25,8 @@ function createSocketMiddleware (socket) {
 const middlws = createSocketMiddleware(ws)
 
 export default function createStore () {
-  return cs(example, {messages: [], user: {}}, applyMiddleware(middlws))
+  return cs(combineReducers({
+    messages, user
+  }), applyMiddleware(middlws))
 }
 
