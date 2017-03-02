@@ -18,9 +18,10 @@ export function userReducer (state, action) {
     case 'user':
       return {
         ...state,
-        isAuthenticated: true,
+        isAuthenticated: action.isAuth,
         isSupa: action.isSupa,
-        name: action.name
+        name: action.name,
+        token: action.token
       }
 
     default:
