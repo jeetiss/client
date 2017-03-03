@@ -1,9 +1,10 @@
 import React from 'react'
 import Login from './containers/login'
 import Chat from './containers/chat'
-import PrivateRoute from './containers/privateroute'
+import Admin from './containers/admin'
+import { connect } from 'react-redux'
+import { selectUser } from './selectors'
 import { injectGlobal } from 'styled-components'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 injectGlobal`
   * {
@@ -17,15 +18,16 @@ injectGlobal`
   }
 `
 
-const App = () => (
-  <Router>
-    <div>
-      <Route path='/login' component={Login} />
-      <PrivateRoute path='/' component={Chat} />
-    </div>
-  </Router>
-)
+const AppView = ({ user }) => {
+  if (!user.isAuthenticated) {
+    return <Login />
+  } else if (user.isSupa) {
+    return <Admin />
+  } else {
+    return <Chat />
+  }
+}
 
-
+const App = connect(selectUser)(AppView)
 
 export default App
