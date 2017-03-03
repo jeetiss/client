@@ -4,7 +4,19 @@ import { messageReducer as messages, userReducer as user } from './reducers/redu
 const ws = new window.WebSocket('ws://localhost:1234')
 
 function createSocketMiddleware (socket) {
-  const send = (data) => ws.send(JSON.stringify(data))
+  const innerSend = obj => socket.send(JSON.stringify(obj))
+  const send = (data) => {
+    if (socket.readyState) {
+      innerSend(data)
+    } else {
+      const handler = () => {
+        innerSend(data)
+        socket.removeEventListener('open', handler)
+      }
+
+      socket.addEventListener('open', handler)
+    }
+  }
 
   return ({ dispatch }) => {
     socket.addEventListener('message', e => {
@@ -22,7 +34,26 @@ function createSocketMiddleware (socket) {
   }
 }
 
-const middlws = createSocketMiddleware(ws)
+const logger = ({ getState }) => next => action => {
+  console.group(action.type)
+  console.info('dispatching', action)
+  let result = next(action)
+  console.log('next state', getState())
+  console.groupEnd(action.type)
+  return result
+}
+
+const prodMiddls = [
+  createSocketMiddleware(ws)
+]
+
+const devMiddls = [
+  logger
+]
+
+const middlws = process.env.NODE_ENV === 'development'
+  ? prodMiddls.concat(devMiddls)
+  : prodMiddls
 
 export default function createStore () {
   return cs(
@@ -30,25 +61,19 @@ export default function createStore () {
       messages, user
     }),
     compose(
-      applyMiddleware(middlws),
-      sendSaveToken({
-        sendToken: token => {
-          ws.onopen = () => {
-            ws.send(JSON.stringify({type: 'ws/auth', token}))
-          }
-        },
+      sendAndSaveToken({
+        actionCreator: token => ({type: 'ws/auth', token}),
         selectToken: state => state.user.token
-      })
+      }),
+      applyMiddleware(
+        ...middlws
+      ),
     )
   )
 }
 
-function sendSaveToken ({ sendToken, selectToken, key = 'fuckredux' }) {
+function sendAndSaveToken ({ actionCreator, selectToken, key = 'fuckredux' }) {
   let prevToken = window.localStorage.getItem(key)
-
-  if (prevToken) {
-    sendToken(prevToken)
-  }
 
   return next => (reducer, initialState, enhanter) => {
     const store = next(reducer, initialState, enhanter)
@@ -61,6 +86,10 @@ function sendSaveToken ({ sendToken, selectToken, key = 'fuckredux' }) {
         prevToken = token
       }
     })
+
+    if (prevToken) {
+      store.dispatch(actionCreator(prevToken))
+    }
 
     return store
   }

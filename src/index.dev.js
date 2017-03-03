@@ -17,8 +17,6 @@ const getApp = App => (
   </AppContainer>
 )
 
-// store.subscribe(() => console.log(store.getState()))
-
 ReactDOM.render(getApp(App), mountPoint)
 
 if (module.hot) {
