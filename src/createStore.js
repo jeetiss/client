@@ -6,7 +6,7 @@ const ws = new window.WebSocket('ws://localhost:1234')
 function createSocketMiddleware (socket) {
   const innerSend = obj => socket.send(JSON.stringify(obj))
   const send = (data) => {
-    if (socket.readyState) {
+    if (socket.readyState === window.WebSocket.OPEN) {
       innerSend(data)
     } else {
       const handler = () => {
@@ -37,7 +37,7 @@ function createSocketMiddleware (socket) {
 const logger = ({ getState }) => next => action => {
   console.group(action.type)
   console.info('dispatching', action)
-  let result = next(action)
+  const result = next(action)
   console.log('next state', getState())
   console.groupEnd(action.type)
   return result
