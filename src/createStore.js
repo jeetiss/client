@@ -1,5 +1,16 @@
-import { createStore as cs, applyMiddleware, combineReducers, compose } from 'redux'
-import { messageReducer as messages, userReducer as user } from './reducers/reducer'
+import {
+  createStore as cs,
+  applyMiddleware,
+  combineReducers,
+  compose
+} from 'redux'
+
+import {
+  messageReducer as messages,
+  userReducer as user,
+  roomsReducer as rooms,
+  selectedRoomReducer as selectedRoom
+} from './reducers/reducer'
 
 const ws = new window.WebSocket('ws://localhost:1234')
 
@@ -58,7 +69,7 @@ const middlws = process.env.NODE_ENV === 'development'
 export default function createStore () {
   return cs(
     combineReducers({
-      messages, user
+      messages, user, rooms, selectedRoom
     }),
     compose(
       sendAndSaveToken({

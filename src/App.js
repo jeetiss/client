@@ -21,10 +21,13 @@ injectGlobal`
 const AppView = ({ user }) => {
   if (!user.isAuthenticated) {
     return <Login />
-  } else if (user.isSupa) {
-    return <Admin />
   } else {
-    return <Chat />
+    return (
+      <div>
+        { user.isSupa ? <Admin /> : ''}
+        <Chat />
+      </div>
+    )
   }
 }
 
