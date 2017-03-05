@@ -4,7 +4,8 @@ export function messageReducer (state, action) {
     case 'message':
       return state.concat({
         time: action.time,
-        text: action.message
+        text: action.message,
+        name: action.name
       })
 
     case 'ws/select':

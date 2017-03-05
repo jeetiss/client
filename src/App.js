@@ -4,7 +4,7 @@ import Chat from './containers/chat'
 import Admin from './containers/admin'
 import { connect } from 'react-redux'
 import { selectUser } from './selectors'
-import { injectGlobal } from 'styled-components'
+import styled, { injectGlobal } from 'styled-components'
 
 injectGlobal`
   * {
@@ -18,15 +18,20 @@ injectGlobal`
   }
 `
 
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const AppView = ({ user }) => {
   if (!user.isAuthenticated) {
     return <Login />
   } else {
     return (
-      <div>
+      <AppContainer>
         { user.isSupa ? <Admin /> : ''}
         <Chat />
-      </div>
+      </AppContainer>
     )
   }
 }
