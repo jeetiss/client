@@ -7,6 +7,9 @@ export function messageReducer (state, action) {
         text: action.message
       })
 
+    case 'ws/select':
+      return []
+
     default:
       return state || defaultMessageState
   }
