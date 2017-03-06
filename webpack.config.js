@@ -36,7 +36,7 @@ module.exports = createConfig([
   defineConstants({
     'process.env.NODE_ENV': process.env.NODE_ENV || 'development',
     'process.env.SUPA_NAME': process.env.SUPA_NAME || 'jeetiss',
-    'process.env.WSSERVER': process.env.WSSERVER || 'ws://sup-fmdipjjkih.now.sh:1234'
+    'process.env.WSSERVER': process.env.WSSERVER || 'wss://rocky-fortress-39209.herokuapp.com'
   }),
   addPlugins(basePlugins),
   env('development', [
