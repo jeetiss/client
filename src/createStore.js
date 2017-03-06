@@ -12,7 +12,7 @@ import {
   selectedRoomReducer as selectedRoom
 } from './reducers/reducer'
 
-const ws = new window.WebSocket('ws://localhost:1234')
+const ws = new window.WebSocket(process.env.WSSERVER)
 
 function createSocketMiddleware (socket) {
   const innerSend = obj => socket.send(JSON.stringify(obj))

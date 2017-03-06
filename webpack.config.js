@@ -34,7 +34,9 @@ const productionPlugins = [
 module.exports = createConfig([
   setOutput('./build/bundle.js'),
   defineConstants({
-    'process.env.NODE_ENV': process.env.NODE_ENV || 'development'
+    'process.env.NODE_ENV': process.env.NODE_ENV || 'development',
+    'process.env.SUPA_NAME': process.env.SUPA_NAME || 'jeetiss',
+    'process.env.WSSERVER': process.env.WSSERVER || 'ws://sup-fmdipjjkih.now.sh:1234'
   }),
   addPlugins(basePlugins),
   env('development', [
