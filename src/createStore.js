@@ -15,17 +15,37 @@ import {
 const ws = new window.WebSocket(process.env.WSSERVER)
 
 function createSocketMiddleware (socket) {
+  let timeoutID = null
+
   const innerSend = obj => socket.send(JSON.stringify(obj))
+  const ping = () => {
+    timeoutID = setTimeout(() => {
+      innerSend({type: 'ping'})
+      ping()
+    }, 50000)
+  }
+
+  const checkPingAndSend = obj => {
+    if (timeoutID) {
+      clearTimeout(timeoutID)
+    }
+
+    innerSend(obj)
+    ping()
+  }
+
   const send = (data) => {
     if (socket.readyState === window.WebSocket.OPEN) {
-      innerSend(data)
-    } else {
+      checkPingAndSend(data)
+    } else if (socket.readyState === window.WebSocket.CONNECTING) {
       const handler = () => {
-        innerSend(data)
+        checkPingAndSend(data)
         socket.removeEventListener('open', handler)
       }
 
       socket.addEventListener('open', handler)
+    } else {
+      throw Error('socket in close state')
     }
   }
 
