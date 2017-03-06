@@ -43,9 +43,10 @@ module.exports = createConfig([
       presets: [
         ['env', {
           'targets': {
-            'chrome': 52
+            'chrome': 56
           },
-          'modules': false
+          'modules': false,
+          'debug': true
         }],
         'react'
       ]
@@ -63,11 +64,14 @@ module.exports = createConfig([
   ]),
   env('production', [
     babel({
-      plugins: [],
+      plugins: ['transform-object-rest-spread'],
       presets: [
         ['env', {
-          'browsers': ['last 2 versions, not ie > 9, not ie_mob > 9'],
-          'modules': false
+          'targets': {
+            'browsers': ['last 2 versions', 'not ie > 9', 'not ie_mob > 9']
+          },
+          'modules': false,
+          'loose': true
         }],
         'react'
       ]
