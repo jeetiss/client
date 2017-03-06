@@ -18,7 +18,6 @@ export default enhance(({ onSub, passVisibility, setVisibility }) => {
   const visibility = passVisibility ? 'visible' : 'hidden'
   const inputHandler = (e) => {
     if (e.target.value === process.env.SUPA_NAME !== passVisibility) {
-      console.log(e.target.value)
       setVisibility(prev => !prev)
     }
   }
