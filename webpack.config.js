@@ -70,7 +70,8 @@ module.exports = createConfig([
       presets: [
         ['env', {
           'targets': {
-            'browsers': ['last 2 versions', 'not ie > 9', 'not ie_mob > 9']
+            'browsers': ['last 2 versions', 'not ie > 9', 'not ie_mob > 9'],
+            'uglify': true
           },
           'modules': false,
           'loose': true
