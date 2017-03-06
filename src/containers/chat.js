@@ -1,9 +1,10 @@
 import React from 'react'
+import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { selectMessages } from '../selectors'
 import { CenteredDiv } from '../components/centereddiv'
 import { Message } from '../components/message'
-import styled from 'styled-components'
+import { Form, Row, Input, Button } from '../components/styled'
 
 const MsgContainer = styled.div`
   display: flex;
@@ -28,21 +29,23 @@ function ChatView ({ messages, dispatch }) {
         )) }
       </MsgContainer>
 
-      <form>
-        <input ref={v => { textarea = v }} />
-        <button onClick={e => {
-          e.preventDefault()
-          const value = textarea.value.trim()
-          if (!value) {
-            return
-          }
+      <Form>
+        <Row>
+          <Input innerRef={v => { textarea = v }} />
+          <Button onClick={e => {
+            e.preventDefault()
+            const value = textarea.value.trim()
+            if (!value) {
+              return
+            }
 
-          dispatch({type: 'ws/message', text: value})
-          textarea.value = ''
-        }}>
-          submit
-        </button>
-      </form>
+            dispatch({type: 'ws/message', text: value})
+            textarea.value = ''
+          }}>
+            Отправить
+          </Button>
+        </Row>
+      </Form>
     </CenteredDiv>
   )
 }

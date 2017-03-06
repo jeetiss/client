@@ -8,7 +8,7 @@ const Wrap = styled.div`
 `
 
 const Container = styled.div`
-  flex: 0 1 960px;
+  flex: 0 1 690px;
 `
 
 export const CenteredDiv = ({ children }) => (
