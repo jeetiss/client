@@ -9,6 +9,7 @@ export default enhance(({ onSub, passVisibility, setVisibility }) => {
   let pass
 
   const visibility = passVisibility ? 'visible' : 'hidden'
+  const opacity = passVisibility ? 1 : 0
   const inputHandler = (e) => {
     if (e.target.value === process.env.SUPA_NAME !== passVisibility) {
       setVisibility(prev => !prev)
@@ -35,7 +36,7 @@ export default enhance(({ onSub, passVisibility, setVisibility }) => {
           <Input
             type='password'
             innerRef={ps => { pass = ps }}
-            style={{visibility}}
+            style={{visibility, opacity}}
           />
           <Button onClick={clickHandler}>
             Далее
