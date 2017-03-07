@@ -15,12 +15,12 @@ const rotate360 = keyframes`
 const Circle = styled.div`
   height: 20px;
   width: 20px;
-  background-color: #b1b1b1;
+  background-color: #b9b9b9;
   border-radius: 50%;
 `
 
 const elements = 2
-const dur = 2.5
+const dur = 0.75
 const delay = dur / elements
 
 const Area = styled.div`
