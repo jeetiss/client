@@ -17,13 +17,20 @@ export function messageReducer (state, action) {
 }
 
 
-const defaultUserState = { isAuthenticated: false }
+const defaultUserState = { tryAuth: true, isAuthenticated: false }
 export function userReducer (state, action) {
   switch (action.type) {
+    case 'ws/auth':
+      return {
+        ...state,
+        tryAuth: true
+      }
+
     case 'user':
       return {
         ...state,
-        isAuthenticated: action.isAuth,
+        tryAuth: false,
+        isAuthenticated: action.isAuth || false,
         isSupa: action.isSupa,
         name: action.name,
         token: action.token

@@ -2,6 +2,7 @@ import React from 'react'
 import Login from './containers/login'
 import Chat from './containers/chat'
 import Admin from './containers/admin'
+import Loader from './components/loader'
 import { connect } from 'react-redux'
 import { selectUser } from './selectors'
 import styled, { injectGlobal } from 'styled-components'
@@ -24,7 +25,9 @@ const AppContainer = styled.div`
 `
 
 const AppView = ({ user }) => {
-  if (!user.isAuthenticated) {
+  if (user.tryAuth) {
+    return <Loader />
+  } else if (!user.isAuthenticated) {
     return <Login />
   } else {
     return (

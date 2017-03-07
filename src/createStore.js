@@ -93,7 +93,8 @@ export default function createStore () {
     }),
     compose(
       sendAndSaveToken({
-        actionCreator: token => ({type: 'ws/auth', token}),
+        actionCreator: token =>
+          token ? {type: 'ws/auth', token} : {type: 'user'},
         selectToken: state => state.user.token
       }),
       applyMiddleware(
@@ -118,9 +119,7 @@ function sendAndSaveToken ({ actionCreator, selectToken, key = 'fuckredux' }) {
       }
     })
 
-    if (prevToken) {
-      store.dispatch(actionCreator(prevToken))
-    }
+    store.dispatch(actionCreator(prevToken))
 
     return store
   }

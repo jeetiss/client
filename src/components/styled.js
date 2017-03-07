@@ -19,3 +19,10 @@ export const Input = styled.input`
 export const Button = styled.button`
   margin: 10px;
 `
+
+export const AllCenter = styled.div`
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`

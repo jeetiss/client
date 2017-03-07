@@ -1,14 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
 import { withState } from 'recompose'
-import { Form, Row, Input, Button } from './styled'
+import { Form, Row, Input, Button, AllCenter } from './styled'
 
-const Center = styled.div`
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`
 const enhance = withState('passVisibility', 'setVisibility', false)
 
 export default enhance(({ onSub, passVisibility, setVisibility }) => {
@@ -28,7 +21,7 @@ export default enhance(({ onSub, passVisibility, setVisibility }) => {
   }
 
   return (
-    <Center>
+    <AllCenter>
       <Form>
         <Row>
           <Input
@@ -49,6 +42,6 @@ export default enhance(({ onSub, passVisibility, setVisibility }) => {
           </Button>
         </Row>
       </Form>
-    </Center>
+    </AllCenter>
   )
 })
