@@ -113,7 +113,6 @@ function sendAndSaveToken ({ actionCreator, selectToken, key = 'fuckredux' }) {
     store.subscribe(() => {
       const token = selectToken(store.getState())
       if (token && token !== prevToken) {
-        console.log(`store ${token}`)
         window.localStorage.setItem(key, token)
         prevToken = token
       }
