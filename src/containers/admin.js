@@ -1,24 +1,32 @@
 import React from 'react'
+import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { selectRooms, selectSelectedRoom, composeSelectors } from '../selectors'
 
+const SelDiv = styled.div`
+  background-color: ${props => props.active ? 'red' : 'white'}
+`
+
 function AdminView ({ rooms, selectedRoom, dispatch }) {
+  const createClickHandler = name => e => {
+    dispatch({ type: 'ws/select', name })
+  }
+
   return (
     <div>
-      <div>это админка</div>
-      <select onChange={
-        e => {
-          const name = e.target.value === 'None' ? null : e.target.value
-          dispatch({ type: 'ws/select', name })
-        }
-      }>
-        { selectedRoom ? <option selected>None</option> : <option>None</option> }
-        { rooms.map(
-          room => selectedRoom === room
-          ? <option key={room} selected>{room}</option>
-          : <option key={room}>{room}</option>
-        ) }
-      </select>
+      <SelDiv
+        onClick={createClickHandler(null)}
+        active={!selectedRoom}
+      >None</SelDiv>
+      { rooms.map(room => (
+        <SelDiv
+          active={room.key === selectedRoom}
+          key={room.key}
+          onClick={createClickHandler(room.key)}
+        >
+          {room.name}
+        </SelDiv>
+      )) }
     </div>
   )
 }

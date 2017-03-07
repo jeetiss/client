@@ -50,11 +50,12 @@ export function roomsReducer (state, action) {
     case 'room_add':
       return state.concat(action.room)
     case 'room_rem':
-      return state.filter(room => room !== action.room)
+      return state.filter(room => room.key !== action.room.key)
     default:
       return state || defaultRoomState
   }
 }
+
 
 const defaultSelectedRoomState = null
 export function selectedRoomReducer (state, action) {
