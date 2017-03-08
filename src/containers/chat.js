@@ -25,6 +25,7 @@ function ChatView ({ messages, dispatch }) {
             key={message.time}
             name={needName(message.name, arr, index) ? message.name : undefined}
             text={message.text}
+            animated={arr.length === 1}
           />
         )) }
       </MsgContainer>

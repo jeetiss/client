@@ -1,4 +1,5 @@
 import React from 'react'
+import AnimatedText from './animatedtext'
 import styled from 'styled-components'
 
 const Body = styled.div`
@@ -19,13 +20,13 @@ const Item = styled.div`
   font-size: 10px;
 `
 
-export const Message = ({ text, name, time }) => (
+export const Message = ({ text, name, time, animated }) => (
   <Body>
     { name ? <Header>
       <Item>{ name }</Item>
     </Header>
     : ''
     }
-    <div> { text } </div>
+    <AnimatedText text={text} animated={animated} />
   </Body>
 )
