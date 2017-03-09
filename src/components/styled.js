@@ -2,18 +2,26 @@ import styled from 'styled-components'
 
 export const Form = styled.form`
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+  padding: 10px;
 `
 
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
+
+  transition: opacity .35s ease;
+
+  padding-bottom: 10px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
 `
 
 export const Input = styled.input`
   flex: 1 1;
   padding: 10px;
-  margin: 10px;
   font-size: 14px;
   border: 1px solid #555;
   border-radius: 2px;
@@ -27,7 +35,6 @@ export const Input = styled.input`
 `
 
 export const Button = styled.button`
-  margin: 10px;
   padding: 10px 20px;
   background-color: #fff;
   color: #555;
@@ -37,6 +44,7 @@ export const Button = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: background-color .35s ease;
+  margin-left: 10px;
 
   &:hover {
     background-color: #eee;

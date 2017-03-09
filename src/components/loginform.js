@@ -24,6 +24,7 @@ export default enhance(({ onSub, passVisibility, setVisibility }) => {
   return (
     <AllCenter>
       <Form>
+        <Row>Представьтесь:</Row>
         <Row>
           <Input
             type='name'

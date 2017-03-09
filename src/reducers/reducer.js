@@ -66,3 +66,13 @@ export function selectedRoomReducer (state, action) {
       return state || defaultSelectedRoomState
   }
 }
+
+const defaultAnimationState = false
+export function animationReducer (state, action) {
+  switch (action.type) {
+    case 'animationEnd':
+      return true
+    default:
+      return state || defaultAnimationState
+  }
+}

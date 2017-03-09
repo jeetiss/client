@@ -5,10 +5,14 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  flex: 1 0;
 `
 
 const Container = styled.div`
   flex: 0 1 690px;
+
+  display: flex;
+  flex-direction: column;
 `
 
 export const CenteredDiv = ({ children }) => (

@@ -20,13 +20,17 @@ const Item = styled.div`
   font-size: 10px;
 `
 
-export const Message = ({ text, name, time, animated }) => (
+export const Message = ({ text, name, time, animated, onAnimationEnd }) => (
   <Body>
     { name ? <Header>
       <Item>{ name }</Item>
     </Header>
     : ''
     }
-    <AnimatedText text={text} animated={animated} />
+    <AnimatedText
+      text={text}
+      animated={animated}
+      onAnimationEnd={onAnimationEnd}
+    />
   </Body>
 )

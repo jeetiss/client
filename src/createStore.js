@@ -9,7 +9,8 @@ import {
   messageReducer as messages,
   userReducer as user,
   roomsReducer as rooms,
-  selectedRoomReducer as selectedRoom
+  selectedRoomReducer as selectedRoom,
+  animationReducer as animationDone
 } from './reducers/reducer'
 
 const ws = new window.WebSocket(process.env.WSSERVER)
@@ -89,7 +90,7 @@ const middlws = process.env.NODE_ENV === 'development'
 export default function createStore () {
   return cs(
     combineReducers({
-      messages, user, rooms, selectedRoom
+      messages, user, rooms, selectedRoom, animationDone
     }),
     compose(
       sendAndSaveToken({

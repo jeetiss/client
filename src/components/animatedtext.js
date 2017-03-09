@@ -15,7 +15,11 @@ export default class AText extends React.PureComponent {
     let lastUpdate = 0
     // (delta => {})
     const timeHandler = time => {
-      if (id >= letters.length) return
+      if (id >= letters.length) {
+        this.props.onAnimationEnd && this.props.onAnimationEnd()
+        return
+      }
+
       if (time - lastUpdate >= 60000 / spm) {
         text += letters[id++]
         this.div.innerText = text
