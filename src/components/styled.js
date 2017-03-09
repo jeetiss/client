@@ -5,7 +5,7 @@ export const Form = styled.form`
   flex-direction: column
 `
 
-export const Row = styled.label`
+export const Row = styled.div`
   display: flex;
   flex-direction: row;
 `
