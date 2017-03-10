@@ -10,7 +10,13 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
 
-  transition: opacity .35s ease;
+  transition: opacity .35s ease,
+    visibility .35s ease,
+    transform .35s ease;
+
+  opacity: ${props => props.visible ? 1 : 0};
+  visibility: ${props => props.visible ? 'visible' : 'hidden'};
+  transform: ${props => props.visible ? 'translateY(0px)' : 'translateY(100px)'};
 
   padding-bottom: 10px;
 

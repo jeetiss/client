@@ -8,7 +8,7 @@ function ChatView ({ animationDone, dispatch }) {
 
   return (
     <Form>
-      <Row style={{opacity: animationDone ? 1 : 0}}>
+      <Row visible={animationDone}>
         <Input innerRef={v => { textarea = v }} />
         <Button onClick={e => {
           e.preventDefault()

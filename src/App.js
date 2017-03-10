@@ -28,6 +28,7 @@ const AppContainer = styled.div`
   left: 0;
   right: 0;
   display: flex;
+  overflow: hidden;
 `
 
 const AppView = ({ user }) => {
