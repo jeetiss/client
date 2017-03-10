@@ -23,15 +23,17 @@ function MessagesView ({ messages, dispatch }) {
   return (
     <MsgContainer>
       <Inner>
-        { messages.map((message, index, arr) => (
-          <Message
-            key={message.time}
-            name={needName(message.name, arr, index) ? message.name : undefined}
-            text={message.text}
-            animated={arr.length === 1}
-            onAnimationEnd={() => dispatch({type: 'animationEnd'})}
-          />
-        )) }
+        { messages.map((message, index, arr) => {
+          const props = {
+            key: message.time,
+            name: needName(message.name, arr, index) ? message.name : undefined,
+            text: message.text,
+            animated: arr.length === 1,
+            onAnimationEnd: arr.length === 1 ? () => dispatch({type: 'animationEnd'}) : undefined
+          }
+
+          return <Message {...props} />
+        }) }
       </Inner>
     </MsgContainer>
   )

@@ -3,6 +3,7 @@ import React from 'react'
 export default class AText extends React.PureComponent {
   componentDidMount () {
     if (!this.props.animated) return
+    this.onEnd = this.props.onAnimationEnd || (() => ({}))
     this.div.style.height = `${this.div.clientHeight}px`
     this.div.style.opacity = 1
     this.div.innerText = ''
@@ -16,7 +17,7 @@ export default class AText extends React.PureComponent {
     // (delta => {})
     const timeHandler = time => {
       if (id >= letters.length) {
-        this.props.onAnimationEnd && this.props.onAnimationEnd()
+        this.terminateAnimation()
         return
       }
 
@@ -33,15 +34,24 @@ export default class AText extends React.PureComponent {
   }
 
   componentWillUnmount () {
-    this.timerId && clearTimeout(this.timerId)
+    this.terminateAnimation()
+  }
+
+  terminateAnimation () {
+    if (this.timerId) {
+      this.onEnd()
+      window.cancelAnimationFrame(this.timerId)
+
+      this.div.innerText = this.props.text
+    }
   }
 
   render () {
     const { text, animated } = this.props
+    this.terminateAnimation()
 
     return (
       <div
-        id='div'
         style={{opacity: animated ? 0 : 1}}
         ref={c => { this.div = c }}
       >
