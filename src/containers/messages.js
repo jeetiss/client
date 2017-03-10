@@ -1,14 +1,14 @@
 import React from 'react'
 import AutoScrollContainer from '../components/autoscrollcontainer'
 import { connect } from 'react-redux'
-import { selectMessages } from '../selectors'
+import { selectMessages, selectAnimationNeed, composeSelectors } from '../selectors'
 import { Message } from '../components/message'
 
 
 const needName = (name, arr, index) =>
   index - 1 < 0 || arr[index - 1].name !== name
 
-function MessagesView ({ messages, dispatch }) {
+function MessagesView ({ messages, animationNeed, dispatch }) {
   return (
     <AutoScrollContainer>
       { messages.map((message, index, arr) => {
@@ -16,8 +16,8 @@ function MessagesView ({ messages, dispatch }) {
           key: message.time,
           name: needName(message.name, arr, index) ? message.name : undefined,
           text: message.text,
-          animated: arr.length === 1,
-          onAnimationEnd: arr.length === 1 ? () => dispatch({type: 'animationEnd'}) : undefined
+          animated: animationNeed,
+          onAnimationEnd: animationNeed ? () => dispatch({type: 'animationEnd'}) : undefined
         }
 
         return <Message {...props} />
@@ -26,5 +26,7 @@ function MessagesView ({ messages, dispatch }) {
   )
 }
 
-const Messages = connect(selectMessages)(MessagesView)
+const Messages = connect(
+  composeSelectors(selectMessages, selectAnimationNeed)
+)(MessagesView)
 export default Messages

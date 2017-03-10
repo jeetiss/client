@@ -48,7 +48,6 @@ export default class AText extends React.PureComponent {
 
   render () {
     const { text, animated } = this.props
-    this.terminateAnimation()
 
     return (
       <div
@@ -58,5 +57,11 @@ export default class AText extends React.PureComponent {
         { text }
       </div>
     )
+  }
+
+  componentDidUpdate (nextProps) {
+    if (nextProps.animated && this.props.animated !== nextProps.animated) {
+      this.terminateAnimation()
+    }
   }
 }

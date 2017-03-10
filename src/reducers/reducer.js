@@ -1,15 +1,37 @@
-const defaultMessageState = []
+const defaultMessageState = {
+  messages: [],
+  needAnimation: true,
+  endedAnimation: false
+}
+
 export function messageReducer (state, action) {
   switch (action.type) {
     case 'message':
-      return state.concat({
-        time: action.time,
-        text: action.message,
-        name: action.name
-      })
+      const { messages, endedAnimation, needAnimation } = state
+
+      return {
+        ...state,
+        messages: messages.concat({
+          time: action.time,
+          text: action.message,
+          name: action.name
+        }),
+        needAnimation: needAnimation && messages.length === 0,
+        endedAnimation: endedAnimation || messages.length !== 0
+      }
+
+    case 'animationEnd':
+      return {
+        ...state,
+        endedAnimation: true
+      }
+
 
     case 'ws/select':
-      return []
+      return {
+        ...state,
+        messages: []
+      }
 
     default:
       return state || defaultMessageState
@@ -64,15 +86,5 @@ export function selectedRoomReducer (state, action) {
       return action.name
     default:
       return state || defaultSelectedRoomState
-  }
-}
-
-const defaultAnimationState = false
-export function animationReducer (state, action) {
-  switch (action.type) {
-    case 'animationEnd':
-      return true
-    default:
-      return state || defaultAnimationState
   }
 }
