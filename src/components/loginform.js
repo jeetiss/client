@@ -24,8 +24,8 @@ export default enhance(({ onSub, passVisibility, setVisibility }) => {
   return (
     <AllCenter>
       <Form>
-        <Row>Представьтесь:</Row>
-        <Row>
+        <Row visible>Представьтесь:</Row>
+        <Row visible>
           <Input
             type='name'
             placeholder='Имя'
@@ -33,7 +33,7 @@ export default enhance(({ onSub, passVisibility, setVisibility }) => {
             innerRef={nm => { name = nm }}
           />
         </Row>
-        <Row>
+        <Row visible>
           <Input
             type='password'
             innerRef={ps => { pass = ps }}
