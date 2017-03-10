@@ -14,7 +14,7 @@ export default class AText extends React.PureComponent {
 
     const spm = 2000
     let lastUpdate = 0
-    // (delta => {})
+
     const timeHandler = time => {
       if (id >= letters.length) {
         this.terminateAnimation()
