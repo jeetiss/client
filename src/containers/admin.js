@@ -3,31 +3,59 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { selectRooms, selectSelectedRoom, composeSelectors } from '../selectors'
 
-const SelDiv = styled.div`
-  background-color: ${props => props.active ? 'red' : 'white'}
+const Select = styled.div`
+  display:flex;
+  flex-flow: row wrap;
+  padding: 10px;
+`
+
+const Option = styled.div`
+  padding: 10px 20px;
+  background-color: ${props => props.active ? '#141414' : '#BABABA'};
+  color: ${props => props.active ? '#FFF' : '#000'};
+  border-radius: 2px;
+  margin-right: 10px;
+  cursor: pointer;
+
+  transition: background-color .35s ease,
+    color .35s ease;
+
+  &:hover {
+    background-color: ${props => props.active ? '#343434' : '#D1D1D1'}
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+
+  &:last-child {
+    margin-right: 0px;
+  }
 `
 
 function AdminView ({ rooms, selectedRoom, dispatch }) {
   const createClickHandler = name => e => {
-    dispatch({ type: 'ws/select', name })
+    if (name !== selectedRoom) {
+      dispatch({ type: 'ws/select', name })
+    }
   }
 
   return (
-    <div>
-      <SelDiv
+    <Select>
+      <Option
         onClick={createClickHandler(null)}
         active={!selectedRoom}
-      >None</SelDiv>
+      >None</Option>
       { rooms.map(room => (
-        <SelDiv
+        <Option
           active={room.key === selectedRoom}
           key={room.key}
           onClick={createClickHandler(room.key)}
         >
           {room.name}
-        </SelDiv>
+        </Option>
       )) }
-    </div>
+    </Select>
   )
 }
 
