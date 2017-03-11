@@ -18,6 +18,11 @@ export default enhance(({ onSub, passVisibility, setVisibility }) => {
 
   const clickHandler = (e) => {
     e.preventDefault()
+    const nm = name.value.trim()
+    const ps = pass.value.trim()
+
+    if (!nm || passVisibility && !ps) return
+
     onSub(name.value, pass.value)
   }
 
