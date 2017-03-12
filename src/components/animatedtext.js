@@ -1,5 +1,7 @@
 import React from 'react'
 
+const { cancelAnimationFrame, requestAnimationFrame } = window
+
 export default class AText extends React.PureComponent {
   componentDidMount () {
     if (!this.props.animated) return
@@ -27,7 +29,7 @@ export default class AText extends React.PureComponent {
         lastUpdate = time
       }
 
-      this.timerId = window.requestAnimationFrame(timeHandler)
+      this.timerId = requestAnimationFrame(timeHandler)
     }
 
     timeHandler()
@@ -40,7 +42,7 @@ export default class AText extends React.PureComponent {
   terminateAnimation () {
     if (this.timerId) {
       this.onEnd()
-      window.cancelAnimationFrame(this.timerId)
+      cancelAnimationFrame(this.timerId)
 
       this.div.innerText = this.props.text
     }
