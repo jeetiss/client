@@ -1,10 +1,12 @@
 import 'react-hot-loader/patch'
-import { AppContainer } from 'react-hot-loader'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import { Provider } from 'react-redux'
 import createStore from './createStore'
+import theme from './theme'
+import { Provider } from 'react-redux'
+import { AppContainer } from 'react-hot-loader'
+import { ThemeProvider } from 'styled-components'
 
 const mountPoint = document.getElementById('root')
 const store = createStore()
@@ -12,7 +14,9 @@ const store = createStore()
 const getApp = App => (
   <AppContainer>
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </Provider>
   </AppContainer>
 )

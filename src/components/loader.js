@@ -26,10 +26,10 @@ const dash = keyframes`
 const color = keyframes`
   100%,
   0% {
-    stroke: #000;
+    stroke: ${props => props.theme.colors.main};
   }
   50% {
-    stroke: #555;
+    stroke: ${props => props.theme.colors.second};
   }
 `
 

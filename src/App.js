@@ -4,6 +4,7 @@ import Messages from './containers/messages'
 import Chat from './containers/chat'
 import Admin from './containers/admin'
 import Loader from './components/loader'
+import theme from './theme'
 import { connect } from 'react-redux'
 import { selectUser } from './selectors'
 import { CenteredDiv } from './components/centereddiv'
@@ -16,7 +17,8 @@ injectGlobal`
 
   body {
     margin: 0;
-    background-color: white;
+    background-color: ${theme.colors.back};
+    color: ${theme.colors.main}
     font-family: 'Roboto', sans-serif;
   }
 `

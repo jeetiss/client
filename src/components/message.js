@@ -9,14 +9,14 @@ const Body = styled.div`
 `
 
 const Header = styled.div`
-  display: flex:
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   padding: 20px 0 10px 0;
 `
 
 const Item = styled.div`
-  color: #a5a5a5;
+  color: ${props => props.theme.colors.second};
   font-size: 10px;
 `
 

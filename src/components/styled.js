@@ -29,22 +29,24 @@ export const Input = styled.input`
   flex: 1 1;
   padding: 10px;
   font-size: 14px;
-  border: 1px solid #555;
+  background-color: ${props => props.theme.colors.back};
+  color: ${props => props.theme.colors.main};
+  border: 1px solid ${props => props.theme.colors.main};
   border-radius: 2px;
 
   transition: visibility .35s ease,
     opacity .35s ease;
 
   &:active, &:focus {
-    border: 1px solid #000;
+    border: 1px solid ${props => props.theme.colors.main};
   }
 `
 
 export const Button = styled.button`
   padding: 10px 20px;
-  background-color: #fff;
-  color: #555;
-  border: 1px solid #555;
+  background-color: ${props => props.theme.colors.back};
+  color: ${props => props.theme.colors.main};
+  border: 1px solid ${props => props.theme.colors.main};
   border-radius: 2px;
   font-size: 14px;
   font-weight: bold;
@@ -53,7 +55,7 @@ export const Button = styled.button`
   margin-left: 10px;
 
   &:hover {
-    background-color: #eee;
+    background-color: ${props => props.theme.colors.active};
   }
 
   &:active {
