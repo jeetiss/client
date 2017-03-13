@@ -11,8 +11,12 @@ const Select = styled.div`
 
 const Option = styled.div`
   padding: 10px 20px;
-  background-color: ${props => props.active ? '#141414' : '#BABABA'};
-  color: ${props => props.active ? '#FFF' : '#000'};
+  background-color: ${
+    props => props.active ? props.theme.colors.main : props.theme.colors.second
+  };
+  color: ${
+    props => props.active ? props.theme.colors.active : props.theme.colors.main
+  };
   border-radius: 2px;
   margin-right: 10px;
   cursor: pointer;
@@ -21,7 +25,9 @@ const Option = styled.div`
     color .35s ease;
 
   &:hover {
-    background-color: ${props => props.active ? '#343434' : '#D1D1D1'}
+    background-color: ${
+      props => props.active ? props.theme.colors.main : props.theme.colors.active
+    };
   }
 
   &:active {
