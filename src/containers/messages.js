@@ -10,7 +10,6 @@ const needName = (name, arr, index) =>
   index - 1 < 0 || arr[index - 1].name !== name
 
 function MessagesView ({ theme, messages, animationNeed, dispatch }) {
-  console.log(theme)
   return (
     <AutoScrollContainer>
       <Header />
