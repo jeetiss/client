@@ -2,54 +2,74 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { AllCenter } from './styled'
 
-const rotate360 = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
+const rotate = keyframes`
+  100% {
     transform: rotate(360deg);
   }
 `
 
-const Circle = styled.div`
-  height: 20px;
-  width: 20px;
-  background-color: #b9b9b9;
-  border-radius: 50%;
+const dash = keyframes`
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
 `
 
-const elements = 2
-const dur = 0.75
-const delay = dur / elements
-
-const Area = styled.div`
-  display: flex;
-  position: absolute;
-  height: 100px;
-  width: 100px;
-  align-items: flex-start;
-  justify-content: center;
-  animation: ${rotate360} ${dur}s ease-in-out infinite; 
+const color = keyframes`
+  100%,
+  0% {
+    stroke: #000;
+  }
+  50% {
+    stroke: #555;
+  }
 `
 
-const Box = styled.div`
+const LoaderWraper = styled.div`
   position: relative;
-  height: 100px;
   width: 100px;
+  height: 100px;
 `
 
+const Svg = styled.svg`
+  position: absolute;
+  animation: ${rotate} 2s linear infinite;
+  transform-origin: center center;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+`
+
+const Circle = styled.circle`
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: ${dash} 1.5s ease-in-out infinite,
+    ${color} 6s ease-in-out infinite;
+  stroke-linecap: round;
+`
 
 export default function Loader () {
   return (
     <AllCenter>
-      <Box>
-        { Array(elements).fill(0).map((val, idx) => (
-          <Area style={{animationDelay: `${delay * idx}s`}} key={idx}>
-            <Circle />
-          </Area>
-        )) }
-      </Box>
+      <LoaderWraper>
+        <Svg viewBox='25 25 50 50'>
+          <Circle cx='50' cy='50' r='20' fill='none'
+            stroke-width='2' stroke-miterlimit='10'
+          />
+        </Svg>
+      </LoaderWraper>
     </AllCenter>
   )
 }
