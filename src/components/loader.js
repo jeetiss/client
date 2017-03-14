@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { AllCenter } from './styled'
+import theme from '../theme'
 
 const rotate = keyframes`
   100% {
@@ -26,10 +27,10 @@ const dash = keyframes`
 const color = keyframes`
   100%,
   0% {
-    stroke: ${props => props.theme.colors.main};
+    stroke: ${theme.colors.main};
   }
   50% {
-    stroke: ${props => props.theme.colors.second};
+    stroke: ${theme.colors.second};
   }
 `
 
