@@ -45,6 +45,7 @@ export default class AText extends React.PureComponent {
       cancelAnimationFrame(this.timerId)
 
       this.div.innerText = this.props.text
+      this.div.style.height = ''
     }
   }
 

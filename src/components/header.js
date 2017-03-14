@@ -23,9 +23,9 @@ const Link = styled.a`
 export default function Header () {
   return (
     <Links>
-      <Link href>CV</Link>
-      <Link href>github</Link>
-      <Link href>twitter</Link>
+      <Link href='https://docs.google.com/document/d/1_85mQcwYpuIGWBTOVnNIgKlwoaYn0bLR4ovVUH-S9VA/edit?usp=sharing' target='_blank'>CV</Link>
+      <Link href='https://github.com/jeetiss' target='_blank'>github</Link>
+      <Link href='https://twitter.com/jeetiss' target='_blank'>twitter</Link>
     </Links>
   )
 }
