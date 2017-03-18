@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import url from 'file-loader!../../CV.pdf'
+import url from 'file-loader?name=17f82ed7e30dd3fe62cc0f8b245fc2dc.pdf!../../CV.pdf'
 
 const Links = styled.div`
   display: flex;
