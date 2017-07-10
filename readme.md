@@ -1,4 +1,4 @@
 # client
 #### front side for my chat
 
-*start:*  `npm i && npm start`
+start:  `npm i && npm start`
